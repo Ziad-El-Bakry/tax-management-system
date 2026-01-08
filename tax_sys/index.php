@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // تسجيل في الـ Log (اختياري لو الجدول موجود)
             try {
-                $pdo->prepare("INSERT INTO audit_log (operation, changed_by, old_data, new_data) VALUES (?, ?, ?, ?)")
-                    ->execute(['NUKE_ALL', 'admin', 'All Taxes', '0']);
+                $pdo->prepare("INSERT INTO audit_log (table_name, operation, changed_by, old_data, new_data) VALUES (?, ?, ?, ?, ?)")
+                    ->execute(['tax_returns', 'NUKE_ALL', 'admin', 'All Taxes', '0']);
             } catch (Exception $e) { /* تجاهل خطأ اللوج */ }
 
         } else {
@@ -46,6 +46,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute(['amount' => $new_amount, 'id' => $target_id]);
             
             $message = "✅ تم تحديث ضريبة المواطن رقم ($target_id) لتصبح $new_amount";
+
+            // تسجيل في اللوج
+            try {
+                $pdo->prepare("INSERT INTO audit_log (table_name, operation, changed_by, old_data, new_data) VALUES (?, ?, ?, ?, ?)")
+                    ->execute(['tax_returns', 'UPDATE', 'admin', 'tax_amount for citizen ' . $target_id, $new_amount]);
+            } catch (Exception $e) { }
         }
     }
 
@@ -56,6 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $pdo->prepare("UPDATE tax_returns SET tax_amount = 0 WHERE citizen_id = :id");
             $stmt->execute(['id' => $target_id]);
             $message = "🎉 تم إلغاء الضريبة تماماً عن المواطن رقم ($target_id)";
+
+            // تسجيل في اللوج
+            try {
+                $pdo->prepare("INSERT INTO audit_log (table_name, operation, changed_by, old_data, new_data) VALUES (?, ?, ?, ?, ?)")
+                    ->execute(['tax_returns', 'WAIVER', 'admin', 'tax_amount for citizen ' . $target_id, '0']);
+            } catch (Exception $e) { }
         }
     }
 }
@@ -85,6 +97,8 @@ try {
 <head>
     <meta charset="UTF-8">
     <title>لوحة التحكم المتقدمة</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
+    <link rel="icon" href="screenshot/logo.ico">
     <style>
         body { font-family: 'Segoe UI', Tahoma; padding: 20px; background-color: #f4f4f9; }
         table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: white; }

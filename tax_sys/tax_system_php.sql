@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 06, 2026 at 08:45 AM
+-- Generation Time: Jan 08, 2026 at 06:27 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -41,6 +41,11 @@ CREATE TABLE `audit_log` (
 -- Dumping data for table `audit_log`
 --
 
+INSERT INTO `audit_log` (`log_id`, `table_name`, `operation`, `old_data`, `new_data`, `changed_by`, `change_time`) VALUES
+(35, 'tax_returns', 'UPDATE', '{\"status\": \"Overdue\", \"return_id\": 9, \"tax_amount\": 12000.00}', '{\"status\": \"Overdue\", \"return_id\": 9, \"tax_amount\": 12000.00}', 'root@localhost', '2026-01-08 06:19:53'),
+(36, 'tax_returns', 'DELETE', '{\"return_id\": 212, \"tax_amount\": 8000.00}', NULL, 'root@localhost', '2026-01-08 06:23:43'),
+(37, 'tax_returns', 'DELETE', '{\"return_id\": 214, \"tax_amount\": 12000.00}', NULL, 'root@localhost', '2026-01-08 06:25:00'),
+(38, 'tax_returns', 'DELETE', '{\"return_id\": 31, \"tax_amount\": 17175.30}', NULL, 'root@localhost', '2026-01-08 06:25:49');
 
 -- --------------------------------------------------------
 
@@ -60,7 +65,8 @@ CREATE TABLE `citizens` (
 --
 
 INSERT INTO `citizens` (`citizen_id`, `full_name`, `email`, `created_at`) VALUES
-(11, 'Amina Hassan', 'amina.hassan@example.com', '2026-01-06 07:46:01');
+(9, 'ahmed ail', 'ahmed12ali@gmail.com', '2026-01-08 06:09:26'),
+(32, 'حسن نصر', 'user825122@example.com', '2026-01-06 07:46:01');
 
 -- --------------------------------------------------------
 
@@ -135,8 +141,10 @@ CREATE TABLE `tax_returns` (
 --
 
 INSERT INTO `tax_returns` (`return_id`, `citizen_id`, `tax_year`, `declared_income`, `tax_amount`, `status`, `created_at`) VALUES
-(9, 11, 2022, 68917.00, 10000.00, 'Overdue', '2026-01-06 07:46:01'),
-(10, 11, 2023, 75000.00, 12000.00, 'PENDING', '2026-01-06 07:46:01');
+(30, 32, 2022, 305649.00, 30564.90, 'Pending', '2026-01-06 07:46:01'),
+(211, 9, 2024, 80000.00, 8000.00, 'Paid', '2026-01-08 06:10:55'),
+(213, 9, 2025, 120000.00, 12000.00, 'PENDING', '2026-01-08 06:11:40');
+
 --
 -- Triggers `tax_returns`
 --
@@ -219,7 +227,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `full_name`, `role`, `created_at`) VALUES
 (1, 'admin', '123', 'مدير النظام', 'admin', '2026-01-06 07:07:33'),
-(10, 'زياد ممدوح', '122', 'User', 'user', '2026-01-06 07:33:37');
+(9, 'ahmed ali', '123', 'User', 'user', '2026-01-08 06:07:44'),
+(32, 'حسن نصر', '123', 'رجل اعمال', 'user', '2026-01-06 09:51:13');
 
 --
 -- Indexes for dumped tables
@@ -267,7 +276,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audit_log`
 --
 ALTER TABLE `audit_log`
-  MODIFY `log_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `log_id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `citizens`
@@ -285,13 +294,13 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `tax_returns`
 --
 ALTER TABLE `tax_returns`
-  MODIFY `return_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `return_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=215;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

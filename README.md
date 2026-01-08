@@ -29,7 +29,20 @@ git clone https://github.com/Ziad-El-Bakry/tax-management-system.git
 ```text
 http://localhost/tax_system/tax_sys/
 ```
+## For try as an Admin:
+
+admin
+123
+
+## For try as an User:
+
+ahmed ali
+123
 
 ## 👨‍💻 Author
-Ziad El Bakry & Omar Maher  
-Full Stack Developers
+Omar Maher
+
+## Developed By
+Ziad El Bakry
+
+Full Stack Developer

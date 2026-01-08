@@ -50,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>تسجيل الدخول</title>
+    <link rel="icon" href="screenshot/logo.ico" type="image/x-icon">
+
     <style>
         body { font-family: Tahoma; background-color: #f4f4f9; text-align: center; padding-top: 50px; }
         .login-box { background: white; width: 300px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }

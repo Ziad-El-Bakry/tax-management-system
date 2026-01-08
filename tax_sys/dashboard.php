@@ -30,6 +30,9 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .welcome { text-align: center; margin-top: 20px; color: #333; }
         .logout { display: inline-block; margin-top: 20px; text-decoration: none; color: white; background: red; padding: 10px 20px; border-radius: 5px;}
     </style>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" href="screenshot/logo.ico">
 </head>
 <body>
     <div class="welcome">
